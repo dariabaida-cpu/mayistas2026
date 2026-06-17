@@ -1215,4 +1215,3 @@ function TalkRow({ talk, section, isFav, onToggleFav, showSection }) {
     </div>
   );
 }
-
