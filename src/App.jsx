@@ -939,12 +939,13 @@ export default function App() {
       if (!byDay[item.section.day]) byDay[item.section.day] = [];
       byDay[item.section.day].push(item);
     }
+    const toMinutes = (t) => {
+      if (!t) return 9999;
+      const [h, m] = t.split(":").map(Number);
+      return h * 60 + m;
+    };
     for (const dayId of Object.keys(byDay)) {
-      byDay[dayId].sort((a, b) => {
-        const ta = a.talk.time || "99:99";
-        const tb = b.talk.time || "99:99";
-        return ta.localeCompare(tb);
-      });
+      byDay[dayId].sort((a, b) => toMinutes(a.talk.time) - toMinutes(b.talk.time));
     }
     return byDay;
   }, [favorites]);
